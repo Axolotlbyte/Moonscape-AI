@@ -1,5 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
+import { env } from "process";
 // import axios from "axios";
 
 interface Prediction {
@@ -23,5 +24,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  return res.status(200).json(resp);
+  console.log(process.env.API_KEY)
+  return res.status(200).json(process.env.API_KEY);
 }

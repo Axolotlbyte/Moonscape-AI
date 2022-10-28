@@ -53,17 +53,24 @@ const IOComponent = ({ readOnly, title, img }: Props) => {
       setLoading(true);
       const data = await postPrompt(prompt);
       setTimeout(async () => {
-        const img = await getImage(data.urls.get);
-        if (!img[0] || img[0].length === 0) {
+        try {
+          const img = await getImage(data.urls.get);
+          if (!img[0] || img[0].length === 0) {
+            toastify("error");
+            return setOutputImg("/default.png");
+          }
+          setOutputImg(img[0]);
+          setLoading(false);
+          return toastify("success");
+        } catch (error) {
+          console.log(error);
+          setOutputImg("/default.png");
           toastify("error");
-          return setOutputImg("/default.png");
+          return setLoading(false);
         }
-        setOutputImg(img[0]);
-        setLoading(false);
-        return toastify("success");
       }, 5500);
       console.log(data);
-      return
+      return;
     } catch (error) {
       console.log(error);
       setOutputImg("/default.png");

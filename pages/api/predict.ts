@@ -12,7 +12,7 @@ interface Prediction {
 }
 
 interface QueryParams {
-  getUrl?: string ;
+  getUrl?: string;
 }
 
 export default async function handler(
@@ -22,7 +22,7 @@ export default async function handler(
   console.log(req.method);
 
   const { prompt } = req.body;
-  const { getUrl }: QueryParams = req.query ;
+  const { getUrl }: QueryParams = req.query;
 
   console.log(getUrl);
 
@@ -48,15 +48,14 @@ export default async function handler(
         "https://api.replicate.com/v1/predictions",
         // "http://localhost:3000/api/test",
         {
-          version:
-            "a9758cbfbd5f3c2094457d996681af52552901775aa2d6dd0b17fd15df959bef",
+          version: process.env.VERSION,
           input: {
             prompt: prompt,
           },
         },
         {
           headers: {
-            Authorization: "Token e82a89f60966cb392806d82f6e96763d6d22c049",
+            Authorization: `Token ${process.env.API_KEY}`,
             "Content-Type": "application/json",
           },
         }
