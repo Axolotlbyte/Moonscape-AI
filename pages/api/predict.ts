@@ -24,7 +24,7 @@ export default async function handler(
   const { prompt } = req.body;
   const { getUrl }: QueryParams = req.query;
 
-  console.log(getUrl);
+  console.log({prompt, getUrl})
 
   if (req.method === "GET") {
     try {
@@ -33,7 +33,7 @@ export default async function handler(
 
       const response = await axios.get(`${getUrl}`, {
         headers: {
-          Authorization: "Token e82a89f60966cb392806d82f6e96763d6d22c049",
+          Authorization: `Token ${process.env.API_KEY}`,
           "Content-Type": "application/json",
         },
       });
@@ -48,7 +48,7 @@ export default async function handler(
         "https://api.replicate.com/v1/predictions",
         // "http://localhost:3000/api/test",
         {
-          version: process.env.VERSION,
+          version: "c24bbf13332c755f9e1c8b3f10c7f438889145def57d554a74ea751dc5e3b509",
           input: {
             prompt: prompt,
           },
@@ -63,6 +63,7 @@ export default async function handler(
 
       return res.status(200).json(response.data);
     } catch (error) {
+      console.log(error)
       return res.json({ errors: ["An unexpected error occured"] });
     }
   } else {

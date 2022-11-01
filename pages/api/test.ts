@@ -24,6 +24,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  console.log(process.env.API_KEY)
-  return res.status(200).json(process.env.API_KEY);
+  console.log(resp)
+  return res.status(200).json(resp);
 }

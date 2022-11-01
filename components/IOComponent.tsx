@@ -36,7 +36,7 @@ const IOComponent = ({ readOnly, title, img }: Props) => {
         progress: undefined,
       });
     } else {
-      return toast.success("Successfully Finished the Tasks", {
+      return toast.success("Successfully Ran The Model", {
         position: "bottom-center",
         autoClose: 2500,
         hideProgressBar: false,
@@ -69,7 +69,6 @@ const IOComponent = ({ readOnly, title, img }: Props) => {
           return setLoading(false);
         }
       }, 5500);
-      console.log(data);
       return;
     } catch (error) {
       console.log(error);
